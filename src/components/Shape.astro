@@ -1,0 +1,24 @@
+---
+// Petite forme flottante (reprise du site Gatsby d'origine).
+// width suit l'échelle Tailwind de l'époque : 1 unité = 0.25rem.
+import icons from './icons.js';
+interface Props {
+  icon: keyof typeof icons;
+  width: number;
+  fill?: string;
+  stroke?: string;
+  left: string;
+  top: string;
+  hideMobile?: boolean;
+}
+const { icon, width, fill = 'none', stroke = 'none', left, top, hideMobile = false } = Astro.props;
+const { viewBox, body } = icons[icon];
+---
+<svg
+  class:list={['shape', { 'hide-mobile': hideMobile }]}
+  viewBox={viewBox}
+  aria-hidden="true"
+  focusable="false"
+  style={`width:${width * 0.25}rem;left:${left};top:${top};fill:${fill};color:${stroke !== 'none' ? stroke : fill};stroke:${stroke !== 'none' ? 'currentColor' : 'none'}`}
+  set:html={body}
+/>

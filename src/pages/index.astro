@@ -1,0 +1,321 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Shape from '../components/Shape.astro';
+import Floaters from '../components/Floaters.astro';
+import avatar from '../assets/rafacolson.jpg';
+
+const c = {
+  orange: '#e07628',
+  red: '#bf381a',
+  gold: '#bf852e',
+  darkest: '#273238',
+  darker: '#364349',
+  white: '#ffffff',
+  cream: '#f1ebcb',
+};
+
+const linkedin = 'https://www.linkedin.com/in/rapha%C3%ABl-colson/';
+const github = 'https://github.com/rafacolsn';
+const email = 'raphcolson@gmail.com';
+
+const timeline = [
+  {
+    date: '2019 – aujourd’hui', color: 'red', kind: 'Emploi',
+    org: 'MEGA', role: 'Développeur web full stack senior', url: 'https://mega.be/',
+    items: [
+      'Développement de plusieurs applications web d’un écosystème SaaS : APIs Laravel, interfaces Vue.js (JavaScript / TypeScript)',
+      'Lien continu avec les équipes produit et métier : cadrer les demandes, les traduire en solutions techniques, prioriser',
+      'Formations d’accueil des nouveaux collègues, accompagnement des développeurs juniors',
+      'Refactorisation de code legacy, réduction de la dette technique, tests automatisés',
+      'Développement assisté par IA au quotidien (Claude Code)',
+    ],
+  },
+  {
+    date: '2018 – 2019', color: 'red', kind: 'Formation',
+    org: 'BeCode', role: 'Formation intensive de développeur web', url: 'https://becode.org/',
+    text: 'Reconversion vers le développement web : Git, JavaScript, PHP et Laravel, Vue, React, bases de données, environnement Linux. Présentations de groupe et animation de workshops, déjà.',
+  },
+  {
+    date: '2016 – 2018', color: 'gold', kind: 'Emploi',
+    org: 'Ateliers de la Colline', role: 'Compagnie de théâtre jeune public',
+    text: 'Chargé de communication et gestion administrative. Site web, tracts, affiches et mise en page. Bords de scène et animations philo pour enfants.',
+  },
+  {
+    date: '2016', color: 'darkest', kind: 'Emploi',
+    org: 'EFDD', role: 'Éducation et formation au développement durable – Cahiers du Développement Durable',
+    text: 'Chargé de communication et formateur. Site web (WordPress), logo, brochures. Formations d’initiation au développement durable, animation de groupes, suivi de projets.',
+  },
+  {
+    date: 'Depuis 2016', color: 'gold', kind: 'Engagement',
+    org: 'Ceinture Aliment-Terre Liégeoise', role: 'Vidéaste bénévole',
+    text: 'Réalisation de vidéos qui font connaître les initiatives locales et innovantes autour d’une alimentation durable en région liégeoise.',
+  },
+  {
+    date: '2008 – 2015', color: 'darkest', kind: 'Emploi',
+    org: 'Nova MJ', role: 'Maison des Jeunes de Chaudfontaine – communication, animation, formation',
+    text: 'Mise sur pied d’un projet radio FM (technique, dossier, équipes bénévoles). Sites web, tracts, affiches. Ateliers et stages médias (radio, photo, vidéo). Formateur en insertion socioprofessionnelle.',
+  },
+  {
+    date: '2013', color: 'red', kind: 'Formation',
+    org: 'Communication NonViolente', role: 'Gestion de conflits et de groupes – Université de Paix, Namur',
+    text: 'Une formation que je mobilise encore aujourd’hui, en équipe, quand les échanges se tendent.',
+  },
+  {
+    date: '2006 – 2008', color: 'darkest', kind: 'Emploi',
+    org: 'Centre culturel de Sambreville', role: 'Responsable audiovisuel et vidéaste pour le théâtre',
+  },
+  {
+    date: '2005', color: 'gold', kind: 'Expérience',
+    org: 'Service Volontaire Européen', role: 'Six mois en Espagne',
+  },
+  {
+    date: '1999 – 2004', color: 'red', kind: 'Études',
+    org: 'IHECS, Bruxelles', role: 'Licence (master) en communication appliquée',
+    text: 'Section « animation socioculturelle et éducation permanente ».',
+  },
+];
+
+const skills = [
+  { title: 'Backend', color: 'red', tags: ['PHP 8+', 'Laravel', 'Lumen', 'APIs REST', 'Services / microservices', 'MariaDB · MySQL', 'MongoDB', 'RabbitMQ', 'Tests unitaires'] },
+  { title: 'Frontend', color: 'orange', tags: ['Vue.js', 'JavaScript', 'TypeScript', 'HTML', 'CSS', 'Intégration UI'] },
+  { title: 'Outils & qualité', color: 'gold', tags: ['Git', 'GitLab CI', 'TeamCity', 'Docker', 'Linux (Ubuntu)', 'PhpStorm', 'VS Code'] },
+  { title: 'IA au quotidien', color: 'orange', text: 'Claude Code fait partie de mon flux de travail : écrire du code, comprendre un code existant, documenter, réfléchir à l’architecture. Un bon moyen d’oser des sujets hors de ma zone de confort.' },
+  { title: 'Fonctionnel', color: 'gold', text: 'Faire le pont entre les équipes métier et la technique : comprendre la demande derrière la demande, la traduire en solution, aider à prioriser.' },
+  { title: 'Transmission & médiation', color: 'red', text: 'Formations d’accueil des nouveaux collègues, accompagnement des juniors, et une formation en Communication NonViolente pour garder des échanges constructifs.' },
+];
+---
+<Base
+  title="Raphaël Colson · développeur web full stack"
+  description="Raphaël Colson, développeur web full stack senior à Liège (Vue.js, PHP/Laravel), avec un parcours en communication, formation et vidéo."
+>
+  <a class="skip" href="#contenu">Aller au contenu</a>
+  <nav class="nav" aria-label="Navigation principale">
+    <a href="#moi">Moi</a>
+    <a href="#parcours">Parcours</a>
+    <a href="#aptitudes">Aptitudes</a>
+    <a href="#langues">Langues</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main id="contenu">
+    <!-- ============ HERO ============ -->
+    <section class="sec hero" aria-labelledby="hero-title">
+      <Floaters speed={0.2}>
+        <div class="updown">
+          <Shape icon="video" width={28} fill={c.orange} left="2%" top="10%" hideMobile />
+          <Shape icon="box" width={6} fill={c.darker} left="60%" top="15%" />
+        </div>
+        <div class="updown-wide">
+          <Shape icon="envira" width={12} fill={c.darker} left="90%" top="50%" />
+          <Shape icon="camera" width={16} fill={c.darker} left="70%" top="80%" />
+          <Shape icon="triangle" width={16} stroke={c.darkest} left="30%" top="65%" hideMobile />
+          <Shape icon="camera" width={16} fill={c.red} left="82%" top="5%" />
+          <Shape icon="circle" width={6} fill={c.darkest} left="75%" top="10%" hideMobile />
+          <Shape icon="circle" width={12} fill={c.orange} left="55%" top="45%" hideMobile />
+        </div>
+        <div class="left-right">
+          <Shape icon="box" width={6} fill={c.darkest} left="10%" top="10%" hideMobile />
+          <Shape icon="hexa" width={8} stroke={c.darker} left="80%" top="70%" />
+          <Shape icon="leaf" width={24} fill={c.red} left="6%" top="70%" hideMobile />
+        </div>
+        <div class="right-left">
+          <Shape icon="circle" width={6} fill={c.red} left="4%" top="20%" />
+          <Shape icon="upDown" width={8} fill={c.darkest} left="95%" top="90%" />
+          <Shape icon="triangle" width={8} stroke={c.darker} left="25%" top="5%" hideMobile />
+          <Shape icon="circle" width={64} fill={c.gold} left="92%" top="3%" />
+        </div>
+        <Shape icon="upDown" width={24} fill={c.darker} left="5%" top="92%" hideMobile />
+        <Shape icon="hexa" width={16} stroke={c.darker} left="10%" top="50%" hideMobile />
+      </Floaters>
+      <div class="inner">
+        <div class="hero-text">
+          <h1 id="hero-title">Raphaël Colson,<br />développeur web.</h1>
+          <p class="lead">
+            Développeur full stack senior chez <a href="https://mega.be/">MEGA</a> depuis 2019,
+            je construis des applications web en <strong>Vue.js</strong> et <strong>PHP / Laravel</strong>.
+          </p>
+          <p class="lead">
+            J’aime autant le code que ce qui l’entoure : comprendre les besoins des équipes métier,
+            transmettre ce que je sais, et faire en sorte que tout le monde se comprenne.
+          </p>
+          <p class="place">Liège, Belgique</p>
+        </div>
+      </div>
+      <a class="scroll-hint" href="#moi" aria-label="Défiler vers la suite">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7l6 6 6-6M6 13l6 6 6-6" /></svg>
+      </a>
+    </section>
+
+    <!-- ============ ME, MYSELF AND I ============ -->
+    <section class="sec about" id="moi" aria-labelledby="moi-title">
+      <div class="bg-dark"></div>
+      <Floaters speed={0.1}>
+        <div class="updown">
+          <Shape icon="box" width={6} fill={c.orange} left="50%" top="75%" hideMobile />
+          <Shape icon="video" width={38} fill={c.darker} left="78%" top="55%" hideMobile />
+          <Shape icon="triangle" width={8} stroke={c.darker} left="25%" top="8%" />
+          <Shape icon="upDown" width={24} fill={c.orange} left="80%" top="80%" hideMobile />
+          <Shape icon="camera" width={10} fill={c.orange} left="42%" top="20%" hideMobile />
+        </div>
+        <div class="updown-wide">
+          <Shape icon="triangle" width={12} stroke={c.white} left="95%" top="40%" />
+          <Shape icon="circle" width={6} fill={c.white} left="85%" top="15%" />
+        </div>
+        <div class="left-right">
+          <Shape icon="circle" width={6} fill={c.white} left="4%" top="20%" />
+          <Shape icon="circle" width={12} fill={c.darker} left="70%" top="60%" />
+          <Shape icon="box" width={6} fill={c.orange} left="90%" top="12%" />
+          <Shape icon="box" width={12} fill={c.darker} left="8%" top="80%" />
+        </div>
+      </Floaters>
+      <div class="inner">
+        <h2 class="title title-refresh" id="moi-title">Me, Myself and I</h2>
+        <div class="about-hero">
+          <Image src={avatar} alt="Portrait de Raphaël Colson" class="avatar" width={384} height={384} />
+          <blockquote class="quote">
+            L’avenir n’est pas ce qui va arriver, mais ce que nous allons en faire…
+            <cite>Henri Bergson</cite>
+          </blockquote>
+        </div>
+        <p>
+          Avant de parler aux machines, j’ai passé une douzaine d’années à parler aux humains.
+          Diplômé en communication appliquée, j’ai travaillé dans l’associatif et la culture :
+          <strong>communication, animation de groupes, formation</strong>, mais aussi création de sites
+          WordPress, réalisation de vidéos et reportages photo en freelance.
+        </p>
+        <p>
+          En 2019, je me suis reconverti au développement web avec BeCode, puis je suis entré chez MEGA.
+          J’y développe plusieurs applications, de l’API Laravel à l’interface Vue.js, et mon rôle a pris
+          au fil des années une vraie <strong>dimension fonctionnelle et pédagogique</strong> : traduire les
+          demandes des équipes métier, former les nouveaux arrivants, accompagner les juniors et, quand
+          il le faut, apaiser les tensions grâce à la Communication NonViolente.
+        </p>
+        <p>
+          Au quotidien, je travaille avec des outils de <strong>développement assisté par l’IA</strong>.
+          Et quand je pose le clavier, je prends parfois la caméra pour la
+          Ceinture Aliment-Terre Liégeoise.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ PARCOURS ============ -->
+    <section class="sec" id="parcours" aria-labelledby="parcours-title">
+      <Floaters speed={0.15}>
+        <div class="left-right">
+          <Shape icon="circle" width={10} fill={c.orange} left="3%" top="12%" hideMobile />
+          <Shape icon="hexa" width={14} stroke={c.darker} left="94%" top="30%" hideMobile />
+        </div>
+        <div class="updown">
+          <Shape icon="leaf" width={14} fill={c.red} left="92%" top="70%" hideMobile />
+          <Shape icon="box" width={8} fill={c.darkest} left="4%" top="60%" hideMobile />
+        </div>
+      </Floaters>
+      <div class="inner">
+        <h2 class="title title-refresh" id="parcours-title">Parcours</h2>
+        <ol class="timeline">
+          {timeline.map((t) => (
+            <li class={`tl ${t.color}`}>
+              <span class="date">{t.date}</span><span class="kind">{t.kind}</span>
+              <div class="card">
+                <h3>{t.url ? <a href={t.url} style="color:inherit">{t.org}</a> : t.org}</h3>
+                <h4>{t.role}</h4>
+                {t.text && <p>{t.text}</p>}
+                {t.items && <ul>{t.items.map((i) => <li>{i}</li>)}</ul>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ APTITUDES ============ -->
+    <section class="sec" id="aptitudes" aria-labelledby="aptitudes-title">
+      <Floaters speed={0.1}>
+        <div class="updown-wide">
+          <Shape icon="cog" width={14} fill={c.gold} left="90%" top="2%" hideMobile />
+          <Shape icon="triangle" width={10} stroke={c.darker} left="3%" top="40%" hideMobile />
+        </div>
+      </Floaters>
+      <div class="inner">
+        <h2 class="title title-cog" id="aptitudes-title">Aptitudes</h2>
+        <div class="grid">
+          {skills.map((s) => (
+            <article class={`skill ${s.color}`}>
+              <h3>{s.title}</h3>
+              {s.tags && <ul class="tags">{s.tags.map((t) => <li>{t}</li>)}</ul>}
+              {s.text && <p>{s.text}</p>}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LANGUES ============ -->
+    <section class="sec" id="langues" aria-labelledby="langues-title">
+      <Floaters speed={0.12}>
+        <div class="right-left">
+          <Shape icon="circle" width={8} fill={c.red} left="95%" top="10%" hideMobile />
+          <Shape icon="camera" width={12} fill={c.darker} left="2%" top="75%" hideMobile />
+        </div>
+      </Floaters>
+      <div class="inner">
+        <h2 class="title title-globe slow" id="langues-title">Langues</h2>
+        <div class="grid two">
+          <article class="lang" lang="fr">
+            <Shape icon="brain" width={16} fill={c.cream} left="76%" top="12%" />
+            <h3>Français</h3>
+            <span class="level">langue maternelle</span>
+            <p>Langue dans laquelle j’ai été programmé…</p>
+          </article>
+          <article class="lang">
+            <Shape icon="thumb" width={16} fill={c.cream} left="76%" top="40%" />
+            <h3 lang="en">English</h3>
+            <span class="level">niveau professionnel</span>
+            <p lang="en">Yes, we can! … read the docs, at least.</p>
+          </article>
+          <article class="lang">
+            <Shape icon="bubble" width={18} stroke={c.cream} left="74%" top="45%" />
+            <h3 lang="es">Español</h3>
+            <span class="level">niveau A2</span>
+            <p lang="es">Lo suficiente para pedir tapas… y para entender un mensaje de error.</p>
+          </article>
+          <article class="lang">
+            <Shape icon="code" width={20} fill={c.cream} left="72%" top="48%" />
+            <h3>PHP / JavaScript</h3>
+            <span class="level">courant</span>
+            <p>Langues que je parle couramment avec les machines.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="sec contact" id="contact" aria-labelledby="contact-title">
+      <div class="bg-dark"></div>
+      <Floaters speed={0.1}>
+        <div class="updown">
+          <Shape icon="upDown" width={10} fill={c.orange} left="88%" top="35%" hideMobile />
+          <Shape icon="circle" width={6} fill={c.white} left="6%" top="40%" hideMobile />
+        </div>
+        <div class="left-right">
+          <Shape icon="triangle" width={10} stroke={c.gold} left="75%" top="70%" />
+          <Shape icon="hexa" width={8} stroke={c.darker} left="20%" top="85%" hideMobile />
+        </div>
+      </Floaters>
+      <div class="inner">
+        <h2 class="title title-refresh" id="contact-title">Contact</h2>
+        <p>
+          Une question, une idée, l’envie d’échanger ? Écrivez-<a href={`mailto:${email}`}>moi</a>
+          ou retrouvez-moi sur d’autres plateformes.
+        </p>
+        <ul class="links">
+          <li><a href={`mailto:${email}`}>{email}</a></li>
+          <li><a href={linkedin} rel="noopener">LinkedIn</a></li>
+          <li><a href={github} rel="noopener">GitHub</a></li>
+        </ul>
+        <footer>&copy; {new Date().getFullYear()} Raphaël Colson · Liège</footer>
+      </div>
+    </section>
+  </main>
+</Base>
