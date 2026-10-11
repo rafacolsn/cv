@@ -24,13 +24,10 @@ const timeline = [
     date: '2019 – aujourd’hui', color: 'red', kind: 'Emploi',
     org: 'MEGA', role: 'Développeur web full stack senior', url: 'https://mega.be/',
     items: [
-      'Développement de plusieurs applications web d’un écosystème SaaS : APIs Laravel, interfaces Vue.js (JavaScript / TypeScript)',
-      'Service owner ou backup de plusieurs microservices, avec une interface de veille qui rassemble les tickets, merge requests et commits qui les concernent',
-      'Lien continu avec les équipes produit et métier : cadrer les demandes, les traduire en solutions techniques, prioriser',
-      'Revues de code au quotidien',
-      'Formations d’accueil des nouveaux collègues, accompagnement des développeurs juniors',
-      'Refactorisation de code legacy, réduction de la dette technique, tests automatisés',
-      'Création de skills Claude Code partagés avec l’équipe : tri de tickets, revue de code, analyse de specs et de bugs',
+      'Plusieurs applications web d’un écosystème SaaS : APIs Laravel, interfaces Vue.js (JavaScript / TypeScript), refactorisation et tests automatisés',
+      'Service owner ou backup de plusieurs microservices, revues de code au quotidien',
+      'Lien continu avec les équipes produit et métier, formations d’accueil des nouveaux collègues, accompagnement des juniors',
+      'Skills Claude Code partagés avec l’équipe : tri de tickets, revue de code, analyse de specs et de bugs',
     ],
   },
   {
@@ -86,6 +83,19 @@ const skills = [
   { title: 'Fonctionnel', color: 'gold', text: 'Faire le pont entre les équipes métier et la technique : comprendre la demande derrière la demande, la traduire en solution, aider à prioriser.' },
   { title: 'Transmission & communication', color: 'red', text: 'Formations d’accueil des nouveaux collègues, accompagnement des juniors, et le souci d’échanges clairs et respectueux, nourri par une formation en Communication NonViolente.' },
 ];
+
+const projects = [
+  {
+    title: 'Stéréo Libre', url: 'https://www.stereolibre.be', color: 'orange',
+    text: 'Le site de l’émission de radio que je co-anime sur Equinoxe FM : épisodes, tracklists complétées par les invités, référencement soigné.',
+    tags: ['Vue.js', 'Netlify', 'Back-office'],
+  },
+  {
+    title: 'raphaelcolson.be', url: 'https://github.com/rafacolsn/cv', color: 'gold',
+    text: 'Ce site : statique, léger, avec ses formes qui flottent et une parallaxe qui sait se faire oublier quand on préfère moins d’animations.',
+    tags: ['Astro', 'CSS', 'GitHub Actions'],
+  },
+];
 ---
 <Base
   title="Raphaël Colson · développeur web full stack"
@@ -93,9 +103,10 @@ const skills = [
 >
   <a class="skip" href="#contenu">Aller au contenu</a>
   <nav class="nav" aria-label="Navigation principale">
-    <a href="#moi">Moi</a>
+    <a class="nav-me" href="#moi">Moi</a>
     <a href="#parcours">Parcours</a>
     <a href="#aptitudes">Aptitudes</a>
+    <a href="#realisations">Réalisations</a>
     <a href="#langues">Langues</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -105,21 +116,21 @@ const skills = [
     <section class="sec hero" aria-labelledby="hero-title">
       <Floaters speed={0.2}>
         <div class="updown">
-          <Shape icon="video" width={28} fill={c.orange} left="2%" top="10%" hideMobile />
+          <Shape icon="video" width={24} fill={c.orange} left="3%" top="11%" hideMobile />
           <Shape icon="box" width={6} fill={c.darker} left="60%" top="15%" />
         </div>
         <div class="updown-wide">
           <Shape icon="envira" width={12} fill={c.darker} left="90%" top="50%" />
           <Shape icon="camera" width={16} fill={c.darker} left="70%" top="80%" />
-          <Shape icon="triangle" width={16} stroke={c.darkest} left="30%" top="65%" hideMobile />
+          <Shape icon="triangle" width={16} stroke={c.darkest} left="38%" top="72%" hideMobile />
           <Shape icon="camera" width={16} fill={c.red} left="82%" top="5%" />
           <Shape icon="circle" width={6} fill={c.darkest} left="75%" top="10%" hideMobile />
-          <Shape icon="circle" width={12} fill={c.orange} left="55%" top="45%" hideMobile />
+          <Shape icon="circle" width={12} fill={c.orange} left="74%" top="40%" hideMobile />
         </div>
         <div class="left-right">
           <Shape icon="box" width={6} fill={c.darkest} left="10%" top="10%" hideMobile />
           <Shape icon="hexa" width={8} stroke={c.darker} left="80%" top="70%" />
-          <Shape icon="leaf" width={24} fill={c.red} left="6%" top="70%" hideMobile />
+          <Shape icon="leaf" width={20} fill={c.red} left="3%" top="66%" hideMobile />
         </div>
         <div class="right-left">
           <Shape icon="circle" width={6} fill={c.red} left="4%" top="20%" />
@@ -128,7 +139,7 @@ const skills = [
           <Shape icon="circle" width={64} fill={c.gold} left="92%" top="3%" />
         </div>
         <Shape icon="upDown" width={24} fill={c.darker} left="5%" top="92%" hideMobile />
-        <Shape icon="hexa" width={16} stroke={c.darker} left="10%" top="50%" hideMobile />
+        <Shape icon="hexa" width={14} stroke={c.darker} left="2%" top="42%" hideMobile />
       </Floaters>
       <div class="inner">
         <div class="hero-text">
@@ -246,6 +257,28 @@ const skills = [
               <h3>{s.title}</h3>
               {s.tags && <ul class="tags">{s.tags.map((t) => <li>{t}</li>)}</ul>}
               {s.text && <p>{s.text}</p>}
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RÉALISATIONS ============ -->
+    <section class="sec" id="realisations" aria-labelledby="realisations-title">
+      <Floaters speed={0.1}>
+        <div class="left-right">
+          <Shape icon="hexa" width={10} stroke={c.darker} left="94%" top="20%" hideMobile />
+          <Shape icon="circle" width={8} fill={c.orange} left="3%" top="70%" hideMobile />
+        </div>
+      </Floaters>
+      <div class="inner">
+        <h2 class="title title-refresh" id="realisations-title">Réalisations</h2>
+        <div class="grid two">
+          {projects.map((p) => (
+            <article class={`skill project ${p.color}`}>
+              <h3><a href={p.url} rel="noopener">{p.title}</a></h3>
+              <p>{p.text}</p>
+              <ul class="tags">{p.tags.map((t) => <li>{t}</li>)}</ul>
             </article>
           ))}
         </div>
