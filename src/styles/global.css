@@ -233,3 +233,13 @@ footer { margin-top: 3.5rem; text-align: center; color: #9babb4; font-size: .95r
 .project h3 a { color: var(--dark); }
 .project h3 a::after { content: " ↗"; color: var(--orange-dark); font-size: .9em; }
 .project p { margin-bottom: 1rem; }
+
+.tl .vids { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .5rem; margin-top: .8rem; font-size: .92rem; }
+.tl .vids span { font-weight: 600; color: var(--darker); }
+.tl .vids a {
+  display: inline-block; padding: .2rem .7rem; border-radius: 99px;
+  border: 1.5px solid var(--c); color: var(--darkest); background: #fff; font-weight: 600;
+}
+.tl.gold .vids a { border-color: var(--gold); }
+.tl .vids a:hover, .tl .vids a:focus-visible { background: var(--c); color: #fff; text-decoration: none; }
+.tl.gold .vids a:hover, .tl.gold .vids a:focus-visible { background: var(--gold-text); }

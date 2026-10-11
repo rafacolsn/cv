@@ -39,6 +39,9 @@ const timeline = [
     date: '2016 – 2018', color: 'gold', kind: 'Emploi',
     org: 'Ateliers de la Colline', role: 'Compagnie de théâtre jeune public',
     text: 'Chargé de communication et gestion administrative. Site web, tracts, affiches et mise en page. Bords de scène et animations philo pour enfants.',
+    videos: [
+      { title: 'SARA, teaser du spectacle', url: 'https://www.youtube.com/watch?v=snxAMHDTjsM' },
+    ],
   },
   {
     date: '2016 – 2018', color: 'darkest', kind: 'Emploi',
@@ -49,6 +52,11 @@ const timeline = [
     date: '2016 – 2019', color: 'gold', kind: 'Freelance',
     org: 'Ceinture Aliment-Terre Liégeoise', role: 'Vidéaste freelance',
     text: 'Réalisation de vidéos qui font connaître les initiatives locales et innovantes autour d’une alimentation durable en région liégeoise.',
+    videos: [
+      { title: 'ADM Bio', url: 'https://www.youtube.com/watch?v=KXa4Ezt62H4' },
+      { title: 'Fungi Up', url: 'https://www.youtube.com/watch?v=5bV-3FKHAGs' },
+      { title: 'Hesbicoop', url: 'https://www.youtube.com/watch?v=DBF5XIqEemg' },
+    ],
   },
   {
     date: '2008 – 2015', color: 'darkest', kind: 'Emploi',
@@ -234,6 +242,12 @@ const projects = [
                 <h4>{t.role}</h4>
                 {t.text && <p>{t.text}</p>}
                 {t.items && <ul>{t.items.map((i) => <li>{i}</li>)}</ul>}
+                {t.videos && (
+                  <p class="vids">
+                    <span>{t.videos.length > 1 ? 'Vidéos' : 'Vidéo'} :</span>
+                    {t.videos.map((v) => <a href={v.url} rel="noopener">▶ {v.title}</a>)}
+                  </p>
+                )}
               </div>
             </li>
           ))}
