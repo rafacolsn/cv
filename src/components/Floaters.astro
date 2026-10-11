@@ -1,0 +1,8 @@
+---
+// Couche de formes animées, déplacée en parallaxe (data-speed) au défilement.
+interface Props { speed?: number; }
+const { speed = 0.1 } = Astro.props;
+---
+<div class="layer" data-speed={speed} aria-hidden="true">
+  <slot />
+</div>

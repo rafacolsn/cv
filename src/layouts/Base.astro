@@ -1,0 +1,66 @@
+---
+import '@fontsource/open-sans/400.css';
+import '@fontsource/open-sans/600.css';
+import '@fontsource/open-sans/700.css';
+import '../styles/global.css';
+
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Raphaël Colson" />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#d9c492" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/rafacolson-32x32.png" />
+    <link rel="apple-touch-icon" href="/favicons/rafacolson-180x180.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_BE" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/favicons/rafacolson-512x512.png', Astro.site)} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Raphaël Colson',
+      jobTitle: 'Développeur web full stack',
+      url: 'https://raphaelcolson.be',
+      address: { '@type': 'PostalAddress', addressLocality: 'Liège', addressCountry: 'BE' },
+      sameAs: ['https://www.linkedin.com/in/rapha%C3%ABl-colson/', 'https://github.com/rafacolsn'],
+    })} />
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Parallaxe légère : chaque couche [data-speed] glisse selon la position de sa section.
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const layers = Array.from(document.querySelectorAll<HTMLElement>('[data-speed]'));
+      let ticking = false;
+      function update() {
+        ticking = false;
+        if (reduce.matches) { layers.forEach((l) => (l.style.transform = '')); return; }
+        const vh = window.innerHeight;
+        for (const l of layers) {
+          const sec = l.parentElement!;
+          const r = sec.getBoundingClientRect();
+          if (r.bottom < -vh || r.top > 2 * vh) continue;
+          const speed = parseFloat(l.dataset.speed || '0');
+          l.style.transform = `translate3d(0, ${(-r.top * speed).toFixed(1)}px, 0)`;
+        }
+      }
+      const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      reduce.addEventListener('change', update);
+      update();
+    </script>
+  </body>
+</html>
